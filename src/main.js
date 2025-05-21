@@ -18,12 +18,13 @@ form.addEventListener('submit', event => {
       if (images.length > 0) {
         createGallery(images);
       }
-      iziToast.show({
+      else{
+        iziToast.show({
         message: "Sorry, there are no images matching your search query. Please try again!"
       })
-      
+      }
     })
     .catch(console.error());
-    
+   form.elements['search-text'].value = '';
     
 });
