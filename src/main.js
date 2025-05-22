@@ -13,7 +13,7 @@ form.addEventListener('submit', event => {
 
   clearGallery();
   showLoader();
-  
+
   getImagesByQuery(query)
     .then(response => {
       const images = response.data.hits;
@@ -22,11 +22,13 @@ form.addEventListener('submit', event => {
       }
       else{
         iziToast.show({
-        message: "Sorry, there are no images matching your search query. Please try again!"
+        message: "Sorry, there are no images matching your search query. Please try again!",
+        class: 'custom-toast',
+        // messageColor: '#fdf0d5',
       })
       }
     })
-    .catch(error => iziToast.show({message: error}))
+    .catch(error => iziToast.show({message: error,  class: 'custom-toast'}))
     .finally(()=>{
       hideLoader();
     });
