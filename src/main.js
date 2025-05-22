@@ -24,7 +24,6 @@ form.addEventListener('submit', event => {
         iziToast.show({
         message: "Sorry, there are no images matching your search query. Please try again!",
         class: 'custom-toast',
-        // messageColor: '#fdf0d5',
       })
       }
     })
