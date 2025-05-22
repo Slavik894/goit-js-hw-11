@@ -1,10 +1,25 @@
+// Описаний у документації
+import SimpleLightbox from "simplelightbox";
+// Додатковий імпорт стилів
+import "simplelightbox/dist/simple-lightbox.min.css";
+
+
 const gallery = document.querySelector(".gallery");
+const loader = document.querySelector(".loader");
+
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
 export function createGallery(images){
    
     const galleryElement = images.map(({webformatURL, largeImageURL, tags, likes, views, comments, downloads})=>
     `<li class="gallery-element">
+    <a href="${largeImageURL}">
     <img class="gallery-element-img" src=${webformatURL} alt=${tags}>
+    </a>
     <div class="element-description">
     <ul class="description-list">
         <li>
@@ -27,17 +42,18 @@ export function createGallery(images){
     
     );
     gallery.insertAdjacentHTML("beforeend", galleryElement.join(''));
-
+   lightbox.refresh();
 };
 
 export function clearGallery(){
     gallery.innerHTML = '';
 };
 
-function showLoader(){
+export function showLoader(){
+    loader.classList.add('is-active');
 
 };
 
-function hideLoader(){
-
+export function hideLoader(){
+     loader.classList.remove('is-active');
 }

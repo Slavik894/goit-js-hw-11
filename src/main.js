@@ -1,5 +1,5 @@
 import { getImagesByQuery } from './js/pixabay-api.js';
-import {clearGallery, createGallery} from './js/render-functions.js';
+import {clearGallery, createGallery, showLoader, hideLoader} from './js/render-functions.js';
 
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
@@ -12,6 +12,8 @@ form.addEventListener('submit', event => {
   if (!query) return;
 
   clearGallery();
+  showLoader();
+  
   getImagesByQuery(query)
     .then(response => {
       const images = response.data.hits;
@@ -24,7 +26,11 @@ form.addEventListener('submit', event => {
       })
       }
     })
-    .catch(console.error());
+    .catch(error => iziToast.show({message: error}))
+    .finally(()=>{
+      hideLoader();
+    });
    form.elements['search-text'].value = '';
     
+  
 });
